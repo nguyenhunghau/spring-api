@@ -6,11 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springmvc-business" />
+        <module name="HelloHibernateSpringMVC" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="springmvc-business" target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="HelloHibernateSpringMVC" target="1.7" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="GENERATE_NO_WARNINGS" value="true" />
   </component>
 </project>

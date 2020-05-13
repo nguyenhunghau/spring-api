@@ -1,0 +1,12 @@
+service\StudentService.class
+config\WebAppInitializer.class
+controller\ProductController.class
+model\Staff.class
+config\AppConfig.class
+controller\StudentController.class
+service\StaffService.class
+model\Student.class
+model\Teacher.class
+controller\StaffController.class
+model\Product.class
+service\ProductService.class

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/springmvc-business.iml" filepath="$PROJECT_DIR$/springmvc-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HelloHibernateSpringMVC.iml" filepath="$PROJECT_DIR$/HelloHibernateSpringMVC.iml" />
     </modules>
   </component>
 </project>
