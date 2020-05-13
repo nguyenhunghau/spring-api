@@ -1,0 +1,28 @@
+- Database
+
+Product: id, name, model, brand, company, description, category_Id, PRICE
+Category: id, name
+Provider and customer: id, name, address, phone, fax, email, contact_person, type(enum('PRovider', 'Customer'))
+Order:  id, date, staff_id, provider_id
+Order_Detail: product_id, quantity, price, Order_id
+Staff: id, name, address, phone, email
+receiving_note: id, date, Provider_id
+Receiving_note_detail: receiving_note_id, Product_id, quantity
+delivery_note: product_id, quantity, customer_id
+sale_invoice: id, date, staff_id, customer_id, product_id, quantity, price (copied from product price then custom), total value.
+
+
+CRUD API for:
+- Staff
+- Customer
+- Order
+- Inventory receiving note
+- Inventory delivery note
+- Sales invoice
+
+Search by:  Customers can be searched by name, address, phone. Note and invoice can be filtered by date. 
+
+Some additional REST API:
+- List all inventory note, sale invoice by a period: start date and end date
+- All sales invoice by a customer and by a sale staff in a period: start date and end date. 
+
