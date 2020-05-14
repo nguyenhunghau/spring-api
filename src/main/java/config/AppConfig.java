@@ -47,7 +47,7 @@ public class AppConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/business");
         dataSource.setUsername("root");
-        dataSource.setPassword("faber@2016");
+        dataSource.setPassword("123456");
 
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setHibernateProperties(properties);

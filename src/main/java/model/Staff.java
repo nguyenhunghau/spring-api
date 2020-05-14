@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,8 +12,9 @@ public class Staff {
     private String email;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -79,5 +77,10 @@ public class Staff {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, address, phone, email);
+    }
+
+    public void merge(Staff staff) {
+        this.name = staff.getName();
+        this.address = staff.getAddress();
     }
 }

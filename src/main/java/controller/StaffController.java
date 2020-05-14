@@ -35,7 +35,7 @@ public class StaffController {
     @RequestMapping(path = "update", method = RequestMethod.POST)
 	@ResponseBody
     public String updateStaff(@RequestBody Staff staff) {
-        if (staffService.save(staff)) {
+        if (staffService.update(staff)) {
             return "Update staff success";
         } else {
             return "Update staff failed";
@@ -43,7 +43,7 @@ public class StaffController {
     }
 
     @RequestMapping(path = "delete", method = RequestMethod.POST)
-    public String deleteStaff(@RequestParam("id") int id) {
+    public String deleteStaff(@RequestParam int id) {
         if (staffService.delete(id)) {
             return "Delete staff success";
         } else {

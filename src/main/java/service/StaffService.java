@@ -3,6 +3,7 @@ package service;
 import model.Staff;
 import model.Student;
 import model.Teacher;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,22 @@ public class StaffService {
             sessionFactory.getCurrentSession().save(staff);
             return true;
         } catch (Exception ex) {
+            LogUtils.write(ExceptionUtils.getStackTrace(ex));
+            return false;
+        }
+    }
+
+    public boolean update(Staff staff){
+        try {
+            Staff staffExisting = findOne(staff.getId());
+            if(staffExisting == null) {
+                return false;
+            }
+            staffExisting.merge(staff);
+            sessionFactory.getCurrentSession().save(staff);
+            return true;
+        } catch (Exception ex) {
+            LogUtils.write(ExceptionUtils.getStackTrace(ex));
             return false;
         }
 
@@ -34,6 +51,7 @@ public class StaffService {
             sessionFactory.getCurrentSession().delete(staff);
             return true;
         } catch (Exception ex) {
+            LogUtils.write(ExceptionUtils.getStackTrace(ex));
             return false;
         }
     }
