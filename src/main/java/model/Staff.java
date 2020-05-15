@@ -94,5 +94,7 @@ public class Staff {
     public void merge(Staff staff) {
         this.name = staff.getName();
         this.address = staff.getAddress();
+        this.phone = staff.getPhone();
+        this.email = staff.getEmail();
     }
 }
