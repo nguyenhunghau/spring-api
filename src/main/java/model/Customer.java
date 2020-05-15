@@ -126,4 +126,9 @@ public class Customer {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
+
+    public void merge(Customer customer) {
+        this.name = customer.getName();
+        this.address = customer.getAddress();
+    }
 }

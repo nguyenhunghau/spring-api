@@ -1,12 +1,10 @@
 package model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "ORDERS")
 public class Order {
     private int id;
     private Timestamp date;

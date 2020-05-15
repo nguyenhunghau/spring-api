@@ -1,5 +1,6 @@
 package service;
 
+import model.Customer;
 import model.Order;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

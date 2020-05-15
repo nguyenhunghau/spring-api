@@ -3,6 +3,7 @@ package controller;
 import component.MyJson;
 import constant.MyConstant;
 import model.Customer;
+import model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
@@ -29,6 +30,25 @@ public class CustomerController {
             return MyJson.createJsonObject(id, MyConstant.ADD_SUCCESS);
         } else {
             return MyJson.createJsonObject(id, MyConstant.ADD_SUCCESS);
+        }
+    }
+
+    @RequestMapping(path = "update", method = RequestMethod.POST)
+    @ResponseBody
+    public String update(@RequestBody Customer customer) {
+        if (customerService.update(customer)) {
+            return MyConstant.UPDATE_SUCCESS;
+        } else {
+            return MyConstant.UPDATE_FAIL;
+        }
+    }
+
+    @RequestMapping(path = "delete", method = RequestMethod.POST)
+    public String deleteStaff(@RequestParam int id) {
+        if (customerService.delete(id)) {
+            return MyConstant.DELETE_SUCCESS;
+        } else {
+            return MyConstant.DELETE_FAIL;
         }
     }
 }
