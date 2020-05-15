@@ -10,6 +10,18 @@ public class Staff {
     private String address;
     private String phone;
     private String email;
+    
+    public Staff() {
+        
+    }
+
+    public Staff(int id, String name, String address, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,5 +94,7 @@ public class Staff {
     public void merge(Staff staff) {
         this.name = staff.getName();
         this.address = staff.getAddress();
+        this.phone = staff.getPhone();
+        this.email = staff.getEmail();
     }
 }
