@@ -1,6 +1,5 @@
 import config.AppConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.test.context.web.WebAppConfiguration;
 import service.StudentService;
 
 /**

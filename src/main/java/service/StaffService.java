@@ -1,8 +1,7 @@
 package service;
 
+import constant.MyConstant;
 import model.Staff;
-import model.Student;
-import model.Teacher;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -19,13 +18,12 @@ public class StaffService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public boolean save(Staff staff){
+    public int save(Staff staff){
         try {
-            sessionFactory.getCurrentSession().save(staff);
-            return true;
+            return (int)sessionFactory.getCurrentSession().save(staff);
         } catch (Exception ex) {
             LogUtils.write(ExceptionUtils.getStackTrace(ex));
-            return false;
+            return MyConstant.ERROR_INSERT;
         }
     }
 
@@ -36,7 +34,6 @@ public class StaffService {
                 return false;
             }
             staffExisting.merge(staff);
-            sessionFactory.getCurrentSession().save(staff);
             return true;
         } catch (Exception ex) {
             LogUtils.write(ExceptionUtils.getStackTrace(ex));
@@ -65,6 +62,5 @@ public class StaffService {
         query.setInteger("id", id);
 
         return (Staff) query.uniqueResult();
-
     }
 }
