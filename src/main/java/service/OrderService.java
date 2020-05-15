@@ -1,12 +1,11 @@
 package service;
 
-import model.Customer;
-import model.Order;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 @Transactional
@@ -16,7 +15,7 @@ public class OrderService {
     private SessionFactory sessionFactory;
 
     public List<Order> findAll(){
-        return sessionFactory.getCurrentSession().createQuery("from Order").list();
+        return sessionFactory.getCurrentSession().createQuery("from Orders").list();
     }
 
 }

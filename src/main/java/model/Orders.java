@@ -1,11 +1,13 @@
 package model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "ORDERS")
-public class Order {
+public class Orders {
     private int id;
     private Timestamp date;
     private String staffId;
@@ -56,12 +58,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order order = (Order) o;
+        Orders orders = (Orders) o;
 
-        if (id != order.id) return false;
-        if (date != null ? !date.equals(order.date) : order.date != null) return false;
-        if (staffId != null ? !staffId.equals(order.staffId) : order.staffId != null) return false;
-        if (providerId != null ? !providerId.equals(order.providerId) : order.providerId != null) return false;
+        if (id != orders.id) return false;
+        if (date != null ? !date.equals(orders.date) : orders.date != null) return false;
+        if (staffId != null ? !staffId.equals(orders.staffId) : orders.staffId != null) return false;
+        if (providerId != null ? !providerId.equals(orders.providerId) : orders.providerId != null) return false;
 
         return true;
     }

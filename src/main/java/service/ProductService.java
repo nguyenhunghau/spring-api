@@ -1,7 +1,6 @@
 package service;
 
 import model.Product;
-import model.Student;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,11 @@
 package model;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "PRODUCT")
 public class Product {
     private int id;
     private String name;
@@ -13,7 +14,7 @@ public class Product {
     private String company;
     private String description;
     private Integer categoryId;
-    private Long price;
+    private Double price;
 
     @Id
     @Column(name = "ID")
@@ -87,11 +88,11 @@ public class Product {
 
     @Basic
     @Column(name = "PRICE")
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -99,19 +100,31 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product that = (Product) o;
-        return id == that.id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(model, that.model) &&
-                Objects.equals(brand, that.brand) &&
-                Objects.equals(company, that.company) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(categoryId, that.categoryId) &&
-                Objects.equals(price, that.price);
+
+        Product product = (Product) o;
+
+        if (id != product.id) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (model != null ? !model.equals(product.model) : product.model != null) return false;
+        if (brand != null ? !brand.equals(product.brand) : product.brand != null) return false;
+        if (company != null ? !company.equals(product.company) : product.company != null) return false;
+        if (description != null ? !description.equals(product.description) : product.description != null) return false;
+        if (categoryId != null ? !categoryId.equals(product.categoryId) : product.categoryId != null) return false;
+        if (price != null ? !price.equals(product.price) : product.price != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, model, brand, company, description, categoryId, price);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (brand != null ? brand.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        return result;
     }
 }
