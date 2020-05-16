@@ -1,19 +1,24 @@
 package model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class Orders {
     private int id;
-    private Timestamp date;
-    private String staffId;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    private Date date;
     private String providerId;
+    private Staff staff;
+
+    private Collection<OrderDetail> orderDetailCollection;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public int getId() {
         return id;
@@ -25,22 +30,12 @@ public class Orders {
 
     @Basic
     @Column(name = "DATE")
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    @Basic
-    @Column(name = "STAFF_ID")
-    public String getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
     }
 
     @Basic
@@ -53,27 +48,23 @@ public class Orders {
         this.providerId = providerId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Orders orders = (Orders) o;
-
-        if (id != orders.id) return false;
-        if (date != null ? !date.equals(orders.date) : orders.date != null) return false;
-        if (staffId != null ? !staffId.equals(orders.staffId) : orders.staffId != null) return false;
-        if (providerId != null ? !providerId.equals(orders.providerId) : orders.providerId != null) return false;
-
-        return true;
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "ORDER_ID")
+    public Collection<OrderDetail> getOrderDetailCollection() {
+        return orderDetailCollection;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (staffId != null ? staffId.hashCode() : 0);
-        result = 31 * result + (providerId != null ? providerId.hashCode() : 0);
-        return result;
+    public void setOrderDetailCollection(Collection<OrderDetail> detailCollection) {
+        this.orderDetailCollection = detailCollection;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "STAFF_ID")
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

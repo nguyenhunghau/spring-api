@@ -53,8 +53,11 @@ public class StaffService {
         }
     }
 
-    public List<Staff> findAll(){
-        return sessionFactory.getCurrentSession().createQuery("from Staff").list();
+    public List<Staff> findAll(int pageNumber, int pageSize){
+        Query query = sessionFactory.getCurrentSession().createQuery("from Staff");
+        query.setFirstResult((pageNumber - 1) * pageSize + 1);
+        query.setMaxResults(pageSize);
+        return query.list();
     }
 
     public Staff findOne(int id){

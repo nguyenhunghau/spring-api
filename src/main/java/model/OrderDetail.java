@@ -8,11 +8,10 @@ public class OrderDetail {
     private int id;
     private Integer quantity;
     private Double price;
-
-    @OneToOne
-    private Orders order;
+    private Product product;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public int getId() {
         return id;
@@ -42,25 +41,14 @@ public class OrderDetail {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderDetail that = (OrderDetail) o;
-
-        if (id != that.id) return false;
-        if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-
-        return true;
+    @OneToOne
+    @JoinColumn(name = "ID")
+    public Product getProduct() {
+        return product;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
+    public void setProduct(Product product) {
+        this.product = product;
     }
+
 }

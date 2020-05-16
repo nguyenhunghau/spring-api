@@ -74,23 +74,6 @@ public class Staff {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Staff staff = (Staff) o;
-        return id == staff.id &&
-                Objects.equals(name, staff.name) &&
-                Objects.equals(address, staff.address) &&
-                Objects.equals(phone, staff.phone) &&
-                Objects.equals(email, staff.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, address, phone, email);
-    }
-
     public void merge(Staff staff) {
         this.name = staff.getName();
         this.address = staff.getAddress();

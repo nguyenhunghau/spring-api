@@ -18,8 +18,8 @@ public class StaffController {
     private StaffService staffService;
 
     @RequestMapping(path = "getAll", method = RequestMethod.GET)
-    public List<Staff> getStaffList() {
-        return staffService.findAll();
+    public List<Staff> getStaffList(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
+        return staffService.findAll(pageNumber, pageSize);
     }
 
     @RequestMapping(path = "add", method = RequestMethod.POST)

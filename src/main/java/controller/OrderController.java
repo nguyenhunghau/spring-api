@@ -1,5 +1,6 @@
 package controller;
 
+import model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,7 @@ public class OrderController {
     private OrderService orderservice;
 
     @RequestMapping(path = "getAll", method = RequestMethod.GET)
-    public List<Order> getOrderList(){
+    public List<Orders> getOrderList(){
         return orderservice.findAll();
-
     }
 }

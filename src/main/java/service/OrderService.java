@@ -1,5 +1,6 @@
 package service;
 
+import model.Orders;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class OrderService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Order> findAll(){
+    public List<Orders> findAll(){
         return sessionFactory.getCurrentSession().createQuery("from Orders").list();
     }
 
