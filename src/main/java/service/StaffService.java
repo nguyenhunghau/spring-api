@@ -55,7 +55,7 @@ public class StaffService {
 
     public List<Staff> findAll(int pageNumber, int pageSize){
         Query query = sessionFactory.getCurrentSession().createQuery("from Staff");
-        query.setFirstResult((pageNumber - 1) * pageSize + 1);
+        query.setFirstResult((pageNumber - 1) * pageSize);
         query.setMaxResults(pageSize);
         return query.list();
     }

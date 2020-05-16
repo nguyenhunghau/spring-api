@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `business` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `business`;
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: business
@@ -43,8 +41,40 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'phu','TabBinh','123456','abc',NULL,'',1),(2,'Phu','Nguyen','23456','bcd',NULL,'phu@xxx.com',2),(3,'Phu','Tan Binh','123456','123213','Hau','phu@gmail.com',2);
+INSERT INTO `customer` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `delivery_note`
+--
+
+DROP TABLE IF EXISTS `delivery_note`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `delivery_note` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `PRODUCT_ID` int DEFAULT NULL,
+  `QUANTITY` int DEFAULT NULL,
+  `CUSTOMER_ID` int DEFAULT NULL,
+  `DATE` date DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `PRODUCT_KEY_idx` (`PRODUCT_ID`),
+  KEY `CUSTOMER_KEY_idx` (`CUSTOMER_ID`),
+  KEY `DELIVERY_PRODUCT_KEY_idx` (`PRODUCT_ID`),
+  KEY `DELIVERY_CUSTOMER_KEY_idx` (`CUSTOMER_ID`),
+  CONSTRAINT `DELIVERY_CUSTOMER_KEY` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `DELIVERY_PRODUCT_KEY` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delivery_note`
+--
+
+LOCK TABLES `delivery_note` WRITE;
+/*!40000 ALTER TABLE `delivery_note` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery_note` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -132,8 +162,99 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'hau','model','brand','Faber','hau',1,1000);
+INSERT INTO `product` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `receiving_note`
+--
+
+DROP TABLE IF EXISTS `receiving_note`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `receiving_note` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `DATE` date DEFAULT NULL,
+  `PROVIDER_ID` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `PROVIDER_KEY_idx` (`PROVIDER_ID`),
+  CONSTRAINT `PROVIDER_KEY` FOREIGN KEY (`PROVIDER_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `receiving_note`
+--
+
+LOCK TABLES `receiving_note` WRITE;
+/*!40000 ALTER TABLE `receiving_note` DISABLE KEYS */;
+INSERT INTO `receiving_note` VALUES (1,'2020-05-16',1),(10,'2020-05-16',NULL),(11,'2020-05-18',NULL);
+/*!40000 ALTER TABLE `receiving_note` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `receiving_note_detail`
+--
+
+DROP TABLE IF EXISTS `receiving_note_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `receiving_note_detail` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `RECEIVING_NOTE_ID` int DEFAULT NULL,
+  `PRODUCT_ID` int DEFAULT NULL,
+  `QUANTITY` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `RECEVING_KEY_idx` (`RECEIVING_NOTE_ID`),
+  KEY `PRODUCT_KEY_idx` (`PRODUCT_ID`),
+  CONSTRAINT `PRODUCT_KEY` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `RECEVING_KEY` FOREIGN KEY (`RECEIVING_NOTE_ID`) REFERENCES `receiving_note` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `receiving_note_detail`
+--
+
+LOCK TABLES `receiving_note_detail` WRITE;
+/*!40000 ALTER TABLE `receiving_note_detail` DISABLE KEYS */;
+INSERT INTO `receiving_note_detail` VALUES (3,1,NULL,25),(13,NULL,NULL,11),(14,NULL,1,11);
+/*!40000 ALTER TABLE `receiving_note_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sale_invoice`
+--
+
+DROP TABLE IF EXISTS `sale_invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sale_invoice` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `DATE` int DEFAULT NULL,
+  `STAFF_ID` int DEFAULT NULL,
+  `CUSTOMER_ID` int DEFAULT NULL,
+  `PRODUCT_ID` int DEFAULT NULL,
+  `QUANTITY` int DEFAULT NULL,
+  `PRICE` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `INVOICE_STAFF_KEY_idx` (`STAFF_ID`),
+  KEY `INVOICE_CUSTOMER_KEY_idx` (`CUSTOMER_ID`),
+  KEY `INVOICE_PRODUCT_KEY_idx` (`PRODUCT_ID`),
+  CONSTRAINT `INVOICE_CUSTOMER_KEY` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `INVOICE_PRODUCT_KEY` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `INVOICE_STAFF_KEY` FOREIGN KEY (`STAFF_ID`) REFERENCES `staff` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sale_invoice`
+--
+
+LOCK TABLES `sale_invoice` WRITE;
+/*!40000 ALTER TABLE `sale_invoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sale_invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -172,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-16  9:47:44
+-- Dump completed on 2020-05-16 13:14:00
