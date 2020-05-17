@@ -1,9 +1,14 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import model.Inventory;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import service.ProductService;
 
@@ -19,5 +24,10 @@ public class ProductController {
     @RequestMapping(path = "list", method = RequestMethod.GET)
     public List<Product> findAll(){
         return productService.findAll();
+    }
+
+    @RequestMapping(path = "inventory", method = RequestMethod.GET)
+    public String findInventoryProduct(@RequestParam String dateStart, @RequestParam String dateEnd) throws JsonProcessingException {
+        return new Gson().toJson(productService.findInventoryProduct(dateStart, dateEnd));
     }
 }

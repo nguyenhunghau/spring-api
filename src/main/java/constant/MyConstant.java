@@ -4,7 +4,7 @@ package constant;
 
 public class MyConstant {
     
-    public static final String DOMAIN = "http://localhost:8888/";
+    public static final String DOMAIN = "http://localhost:8080/";
     public static final String ADD_SUCCESS = "Add success";
     public static final String ADD_FAIL = "Add fail";
     public static final String UPDATE_SUCCESS = "Update success";

@@ -9,18 +9,18 @@ import java.util.Collection;
 public class ReceivingNote {
     private int id;
     private Date date;
-    private Customer customer;
+    private Customer provider;
 
     private Collection<ReceivingNoteDetail> receivingDetailCollection;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "PROVIDER_ID")
-    public Customer getCustomer() {
-        return customer;
+    public Customer getProvider() {
+        return provider;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setProvider(Customer customer) {
+        this.provider = customer;
     }
 
     
@@ -57,6 +57,6 @@ public class ReceivingNote {
 
     public void merge(ReceivingNote note) {
         this.date = note.getDate();
-        this.customer= note.getCustomer();
+        this.provider = note.getProvider();
     }
 }

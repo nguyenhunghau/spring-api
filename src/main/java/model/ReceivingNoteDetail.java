@@ -9,20 +9,6 @@ public class ReceivingNoteDetail {
     private Integer quantity;
     private Product product;
 
-//    @Basic
-//    @Column(name = "PRODUCT_ID")
-//    public int getProductId() {
-//        return productId;
-//    }
-//
-//    public void setProductId(int productId) {
-//        this.productId = productId;
-//    }
-    
-    
-
-//    private Product product;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

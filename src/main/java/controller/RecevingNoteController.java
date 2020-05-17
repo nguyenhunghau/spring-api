@@ -19,7 +19,7 @@ public class RecevingNoteController {
     private RecevingNoteService recevingNoteService;
 
     @RequestMapping(path = "getAll", method = RequestMethod.GET)
-    public List<ReceivingNote> getStaffList(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
+    public List<ReceivingNote> ferReceivingList(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
         return recevingNoteService.findAll(pageNumber, pageSize);
     }
 

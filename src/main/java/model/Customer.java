@@ -13,6 +13,20 @@ public class Customer {
     private String email;
     private Integer type;
 
+    public Customer() {}
+
+    public Customer(int id, String name, String address, String phone, String fax,
+                    String contactPerson, String email, Integer type) {
+        this.id= id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.fax = fax;
+        this.contactPerson = contactPerson;
+        this.email = email;
+        this.type = type;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
