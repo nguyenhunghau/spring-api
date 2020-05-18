@@ -13,7 +13,7 @@ public class ReceivingNote {
 
     private Collection<ReceivingNoteDetail> receivingDetailCollection;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "PROVIDER_ID")
     public Customer getProvider() {
         return provider;
