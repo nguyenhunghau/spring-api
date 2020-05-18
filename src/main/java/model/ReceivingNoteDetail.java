@@ -9,6 +9,15 @@ public class ReceivingNoteDetail {
     private Integer quantity;
     private Product product;
 
+    public ReceivingNoteDetail() {
+
+    }
+
+    public ReceivingNoteDetail(int quantity, Product product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -30,7 +39,7 @@ public class ReceivingNoteDetail {
         this.quantity = quantity;
     }
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;

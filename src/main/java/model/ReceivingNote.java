@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "receiving_note", schema = "business", catalog = "")
@@ -12,6 +13,18 @@ public class ReceivingNote {
     private Customer provider;
 
     private Collection<ReceivingNoteDetail> receivingDetailCollection;
+
+    public ReceivingNote() {
+
+    }
+
+    public ReceivingNote(int id, Customer provider, List<ReceivingNoteDetail> detailList) {
+        this.id = id;
+        java.util.Date dateTime = new java.util.Date();
+        this.date = new Date(dateTime.getTime());
+        this.provider = provider;
+        this.receivingDetailCollection = detailList;
+    }
 
     @OneToOne
     @JoinColumn(name = "PROVIDER_ID")

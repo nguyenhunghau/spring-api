@@ -94,7 +94,7 @@ public class RecevingNoteService {
     }
     
     public ReceivingNoteDetail findDetail(int id){
-        Query query = sessionFactory.getCurrentSession().createQuery("from ReceivingNoteDetail where id=:id");
+        Query query = sessionFactory.getCurrentSession().createQuery("from ReceivingNoteDetail where =:id");
         query.setInteger("id", id);
 
         return (ReceivingNoteDetail) query.uniqueResult();

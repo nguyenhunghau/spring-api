@@ -17,7 +17,7 @@ public class MyConnection {
         try {
             URL url = new URL(MyConstant.DOMAIN + urlPath);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            if (connection.getResponseCode() != 200) {
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 return "";
             }
             String readLine = null;

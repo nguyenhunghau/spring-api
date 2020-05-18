@@ -1,6 +1,6 @@
 import config.AppConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import service.StudentService;
+import service.StaffService;
 
 /**
  * Created by CoT on 7/29/18.
@@ -14,8 +14,8 @@ public class Main {
 
         context.refresh();
 
-        StudentService studentService = context.getBean(StudentService.class);
+        StaffService staffService = context.getBean(StaffService.class);
 
-        System.out.println(studentService.findStudents("Student"));
+        System.out.println(staffService.findAll(1, 10));
     }
 }
