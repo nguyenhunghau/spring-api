@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `business`;
 CREATE DATABASE  IF NOT EXISTS `business` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `business`;
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
@@ -43,7 +44,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'phu','TabBinh',NULL,NULL,NULL,NULL,1),(3,'long',NULL,NULL,NULL,NULL,NULL,2);
+INSERT INTO `customer` VALUES (1,'phu','TabBinh',NULL,NULL,NULL,NULL,1),(3,'long','q10','43242',NULL,NULL,NULL,2);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +166,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'CLosthes',NULL,NULL,NULL,NULL,NULL,NULL),(2,'food',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `product` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +184,7 @@ CREATE TABLE `receiving_note` (
   PRIMARY KEY (`ID`),
   KEY `PROVIDER_KEY_idx` (`PROVIDER_ID`),
   CONSTRAINT `PROVIDER_KEY` FOREIGN KEY (`PROVIDER_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +193,7 @@ CREATE TABLE `receiving_note` (
 
 LOCK TABLES `receiving_note` WRITE;
 /*!40000 ALTER TABLE `receiving_note` DISABLE KEYS */;
-INSERT INTO `receiving_note` VALUES (1,'2020-05-16',1),(10,'2020-05-16',NULL),(11,'2020-05-18',NULL);
+INSERT INTO `receiving_note` VALUES (1,'2020-05-16',1),(10,'2020-05-16',NULL),(11,'2020-05-18',NULL),(16,'2020-05-18',3),(18,'2020-05-18',1);
 /*!40000 ALTER TABLE `receiving_note` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +214,7 @@ CREATE TABLE `receiving_note_detail` (
   KEY `PRODUCT_KEY_idx` (`PRODUCT_ID`),
   CONSTRAINT `PRODUCT_KEY` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`),
   CONSTRAINT `RECEVING_KEY` FOREIGN KEY (`RECEIVING_NOTE_ID`) REFERENCES `receiving_note` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +223,7 @@ CREATE TABLE `receiving_note_detail` (
 
 LOCK TABLES `receiving_note_detail` WRITE;
 /*!40000 ALTER TABLE `receiving_note_detail` DISABLE KEYS */;
-INSERT INTO `receiving_note_detail` VALUES (3,1,1,250),(13,1,2,1100),(14,1,1,200);
+INSERT INTO `receiving_note_detail` VALUES (3,1,1,250),(13,1,2,1100),(14,1,1,200),(20,16,2,20),(22,NULL,1,40),(23,18,2,20),(24,NULL,1,40),(26,NULL,1,40);
 /*!40000 ALTER TABLE `receiving_note_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +276,7 @@ CREATE TABLE `staff` (
   `PHONE` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `EMAIL` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +285,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (3,'hunghau','Ha Noi','123456','hau@xxx.com'),(5,'hunghau',NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL),(8,'hunghau','HCM',NULL,NULL),(9,'hunghau','Ha Noi',NULL,NULL),(10,'hunghau','Ha Noi',NULL,NULL),(11,'phu','TabBinh','32435435','phu@xxx.com');
+INSERT INTO `staff` VALUES (3,'hunghau','Ha Noi','123456','hau@xxx.com'),(5,'hunghau',NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL),(8,'hunghau','HCM',NULL,NULL),(9,'hunghau','Ha Noi',NULL,NULL),(10,'hunghau','Ha Noi',NULL,NULL),(11,'phu','TabBinh','32435435','phu@xxx.com'),(15,'phu-le','q10','32435435','phu@xxx.com');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17 11:18:34
+-- Dump completed on 2020-05-18 19:57:46
