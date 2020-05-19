@@ -9,11 +9,9 @@ import java.util.Collection;
 @Entity
 public class Orders {
     private int id;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="MM/dd/yyyy")
     private Date date;
-    private String providerId;
     private Staff staff;
+    private Customer provider;
 
     private Collection<OrderDetail> orderDetailCollection;
 
@@ -38,15 +36,16 @@ public class Orders {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "PROVIDER_ID")
-    public String getProviderId() {
-        return providerId;
+    @OneToOne
+    @JoinColumn(name = "PROVIDER_ID")
+    public Customer getProvider() {
+        return provider;
     }
 
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
+    public void setProvider(Customer provider) {
+        this.provider = provider;
     }
+    
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name = "ORDER_ID")
@@ -66,5 +65,11 @@ public class Orders {
 
     public void setStaff(Staff staff) {
         this.staff = staff;
+    }
+
+    public void merge(Orders order) {
+        this.date = order.getDate();
+        this.staff = order.getStaff();
+        this.provider = order.getProvider();
     }
 }

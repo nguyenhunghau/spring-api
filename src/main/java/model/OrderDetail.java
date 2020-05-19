@@ -51,4 +51,10 @@ public class OrderDetail {
         this.product = product;
     }
 
+    public void merge(OrderDetail detail) {
+        this.quantity = detail.getQuantity();
+        this.price = detail.getPrice();
+        this.product = detail.getProduct();
+    }
+
 }
