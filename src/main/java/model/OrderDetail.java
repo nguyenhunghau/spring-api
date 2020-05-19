@@ -42,7 +42,7 @@ public class OrderDetail {
     }
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;
     }
