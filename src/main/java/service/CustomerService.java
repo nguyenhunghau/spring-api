@@ -21,6 +21,14 @@ public class CustomerService {
     public List<Customer> findAll() {
         return sessionFactory.getCurrentSession().createQuery("from Customer").list();
     }
+    
+    public List<Customer> search(String name, String address, String phone) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Customer where name like:name and address like:address and phone like:phone");
+        query.setString("name", "%" + name + "%");
+        query.setString("address", "%" + address + "%");
+        query.setString("phone", "%" + phone + "%");
+        return query.list();
+    }
 
     public int save(Customer customer) {
         try {

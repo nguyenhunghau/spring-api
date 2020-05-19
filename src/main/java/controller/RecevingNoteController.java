@@ -22,6 +22,11 @@ public class RecevingNoteController {
     public List<ReceivingNote> ferReceivingList(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
         return recevingNoteService.findAll(pageNumber, pageSize);
     }
+    
+    @RequestMapping(path = "search", method = RequestMethod.GET)
+    public List<ReceivingNote> search( @RequestParam String dateStart, @RequestParam String dateEnd) {
+        return recevingNoteService.search(dateStart, dateEnd);
+    }
 
     @RequestMapping(path = "add", method = RequestMethod.POST)
     @ResponseBody

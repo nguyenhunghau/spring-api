@@ -10,8 +10,8 @@ public class Product {
     private String brand;
     private String company;
     private String description;
-    private String category;
     private Double price;
+    private Category category;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,13 +74,13 @@ public class Product {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "CATEGORY")
-    public String getCategory() {
+    @OneToOne
+    @JoinColumn(name = "CATEGORY_ID")
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

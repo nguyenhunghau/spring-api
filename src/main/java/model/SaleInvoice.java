@@ -1,18 +1,20 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "sale_invoice", schema = "business", catalog = "")
 public class SaleInvoice {
     private int id;
     private Date date;
-    private Integer quantity;
-    private Integer price;
-    private Product product;
     private Customer customer;
     private Staff staff;
+
+    private Collection<SaleInvoiceDetail> saleInvoiceDetailCollection;
 
     @Id
     @Column(name = "ID")
@@ -35,36 +37,6 @@ public class SaleInvoice {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "QUANTITY")
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    @Basic
-    @Column(name = "PRICE")
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "PRODUCT_ID")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     @OneToOne
     @JoinColumn(name = "CUSTOMER_ID")
     public Customer getCustomer() {
@@ -81,6 +53,16 @@ public class SaleInvoice {
         return staff;
     }
 
+    @OneToMany(mappedBy = "saleInvoice", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JsonManagedReference
+    public Collection<SaleInvoiceDetail> getSaleInvoiceDetailCollection() {
+        return saleInvoiceDetailCollection;
+    }
+
+    public void setSaleInvoiceDetailCollection(Collection<SaleInvoiceDetail> saleInvoiceDetailCollection) {
+        this.saleInvoiceDetailCollection = saleInvoiceDetailCollection;
+    }
+
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
@@ -88,8 +70,6 @@ public class SaleInvoice {
     public void merge(SaleInvoice note) {
         this.customer = note.getCustomer();
         this.date = note.getDate();
-        this.price = note.getPrice();
-        this.product = note.getProduct();
-        this.quantity = note.getQuantity();
+        this.staff = note.getStaff();
     }
 }

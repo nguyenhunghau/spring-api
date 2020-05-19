@@ -21,6 +21,11 @@ public class CustomerController {
     public List<Customer> getCustomerList() {
         return customerService.findAll();
     }
+    
+    @RequestMapping(path = "search", method = RequestMethod.GET)
+    public List<Customer> getCustomerList(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "") String address, @RequestParam(defaultValue = "") String phone) {
+        return customerService.search(name, address, phone);
+    }
 
     @RequestMapping(path = "add", method = RequestMethod.POST)
     @ResponseBody

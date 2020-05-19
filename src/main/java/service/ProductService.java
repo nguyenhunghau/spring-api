@@ -19,9 +19,6 @@ public class ProductService {
         this.sessionFactory = sessionFactory;
     }
 
-//    public void saveStudent(Student student){
-//        sessionFactory.getCurrentSession().save(student);
-//    }
 
     public List<Product> findAll() {
         System.out.println(sessionFactory.getCurrentSession().createQuery("from Product").list().size());
@@ -60,9 +57,12 @@ public class ProductService {
         List<DeliveryNote> deliveryList = findDeliveryList(dateStart, dateEnd);
         Map<String, Integer> resultMap = new HashMap<>();
         for (DeliveryNote item : deliveryList) {
-            int total = resultMap.getOrDefault(item.getProduct().getName(), 0);
-            total += item.getQuantity();
-            resultMap.put(item.getProduct().getName(), total);
+            for (Iterator<DeliveryNoteDetail> iterator = item.getDeliveryNoteDetailCollection().iterator(); iterator.hasNext(); ) {
+                DeliveryNoteDetail detail = iterator.next();
+                int total = resultMap.getOrDefault(detail.getProduct().getName(), 0);
+                total += detail.getQuantity();
+                resultMap.put(detail.getProduct().getName(), total);
+            }
         }
         return resultMap;
     }

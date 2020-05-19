@@ -94,9 +94,16 @@ public class RecevingNoteService {
     }
     
     public ReceivingNoteDetail findDetail(int id){
-        Query query = sessionFactory.getCurrentSession().createQuery("from ReceivingNoteDetail where =:id");
+        Query query = sessionFactory.getCurrentSession().createQuery("from ReceivingNoteDetail where id=:id");
         query.setInteger("id", id);
 
         return (ReceivingNoteDetail) query.uniqueResult();
+    }
+
+    public List<ReceivingNote> search(String dateStart, String dateEnd) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from ReceivingNote where date between :dateStart AND :dateEnd");
+         query.setString("dateStart", dateStart);
+        query.setString("dateEnd", dateEnd);
+        return query.list();
     }
 }

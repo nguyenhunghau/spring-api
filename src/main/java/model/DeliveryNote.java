@@ -1,16 +1,17 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "delivery_note", schema = "business", catalog = "")
 public class DeliveryNote {
     private int id;
-    private Integer quantity;
     private Date date;
-    private Product product;
     private Customer customer;
+    private Collection<DeliveryNoteDetail> deliveryNoteDetailCollection;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +25,6 @@ public class DeliveryNote {
     }
 
     @Basic
-    @Column(name = "QUANTITY")
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    @Basic
     @Column(name = "DATE")
     public Date getDate() {
         return date;
@@ -41,16 +32,6 @@ public class DeliveryNote {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "PRODUCT_ID")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @OneToOne
@@ -63,10 +44,18 @@ public class DeliveryNote {
         this.customer = customer;
     }
 
+    @OneToMany(mappedBy = "deliveryNote", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JsonManagedReference
+    public Collection<DeliveryNoteDetail> getDeliveryNoteDetailCollection() {
+        return deliveryNoteDetailCollection;
+    }
+
+    public void setDeliveryNoteDetailCollection(Collection<DeliveryNoteDetail> deliveryNoteDetailCollection) {
+        this.deliveryNoteDetailCollection = deliveryNoteDetailCollection;
+    }
+
     public void merge(DeliveryNote note) {
         this.customer = note.getCustomer();
         this.date = note.getDate();
-        this.product = note.getProduct();
-        this.quantity = note.getQuantity();
     }
 }

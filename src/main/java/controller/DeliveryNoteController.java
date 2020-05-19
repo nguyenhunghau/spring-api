@@ -3,12 +3,9 @@ package controller;
 import component.MyJson;
 import constant.MyConstant;
 import model.DeliveryNote;
-import model.ReceivingNote;
-import model.ReceivingNoteDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.DeliveryNoteService;
-import service.RecevingNoteService;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class DeliveryNoteController {
     @RequestMapping(path = "getAll", method = RequestMethod.GET)
     public List<DeliveryNote> getDeliveryList(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
         return deliveryNoteService.findAll(pageNumber, pageSize);
+    }
+    
+    @RequestMapping(path = "search", method = RequestMethod.GET)
+    public List<DeliveryNote> search(@RequestParam String dateStart, @RequestParam String dateEnd) {
+        return deliveryNoteService.search(dateStart, dateEnd);
     }
 
     @RequestMapping(path = "add", method = RequestMethod.POST)
@@ -53,5 +55,4 @@ public class DeliveryNoteController {
             return MyConstant.DELETE_FAIL;
         }
     }
-
 }
